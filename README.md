@@ -1,5 +1,6 @@
 # CyberPalooza-Crypto-Unplugged
 Short session introduction to cryptography principles with descriptions of a few classic techniques
 
+Run the app at https://charles-hoot.github.io/Induction/app.html/CyberPalooza-Crypto-Unplugged/freq.html
 
-[Frequency Analysis App](https:\\charles-hoot.github.io\CyberPalooza-Crypto-Unplugged/freq.html)
+
