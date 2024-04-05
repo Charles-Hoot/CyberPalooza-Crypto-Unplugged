@@ -20,7 +20,6 @@
 
   <h2>Basic Frequency Analysis</h2>
 
-  
     <button type="button"
     class="btn btn-primary m-4"
     onclick="getFrequencies('transposition')">
@@ -93,7 +92,7 @@
         'i', 'j', 'k', 'l', 'm', 'n', 'o', 
         'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     
-    let englishOrder = ['e', 't', 'a', 'o',
+    let englishCharOrder = ['e', 't', 'a', 'o',
         'i', 'n', 's', 'r',
         'h', 'd', 'l', 'u',
         'c', 'm', 'f', 
@@ -124,52 +123,67 @@
     for (key in counts){
       textMap[key]=Math.round(counts[key]/total * 100 * 10) / 10 
     }
+    console.log("textMap is ")
     console.log(textMap)
     
-    let textOrder = []
+    let textCharOrder = []
     for(value of characters){
-      textOrder.push(value)
+      textCharOrder.push(value)
     }
     for(i=0; i<26; i++){
       for(j=0; j<26; j++){
-        if(textMap[textOrder[i]] > textMap[textOrder[j]]){
-          let temp = textOrder[i]
-          textOrder[i]=textOrder[j]
-          textOrder[j] = temp
+        if(textMap[textCharOrder[i]] > textMap[textCharOrder[j]]){
+          let temp = textCharOrder[i]
+          textCharOrder[i]=textCharOrder[j]
+          textCharOrder[j] = temp
         }
       }
     }
-    console.log(textOrder)
+    console.log("textCharOrder is ")
+    console.log(textCharOrder)
     
     let englishFreq = []
-    let textFreq = []
     for (key in englishMap){
       englishFreq.push(englishMap[key])
+    }
+
+    let textByEnglishFreq = []
+    for (key in englishMap){
+      textByEnglishFreq.push(textMap[key])
+    }
+
+    let textFreq = []
+    for (key of textCharOrder){
       textFreq.push(textMap[key])
     }
 
     englishDistribution = []
-    for (key of textOrder){
+    for (key of textCharOrder){
       englishDistribution.push(textMap[key])
     }
 
 
     textDistribution = []
-    for (key of textOrder){
+    for (key in textCharOrder){
       textDistribution.push(textMap[key])
     }
 
+    console.log("sorted english Frequecies are")
     console.log(englishFreq)
+    console.log("sorted text Frequecies are")
+    console.log(textFreq)
+
+
 
     let englishTrace = {
-      x: englishOrder,
+      x: englishCharOrder,
 	    y: englishFreq, 
       mode: "lines",
       name: "English Frequencies"};
 
     let textTrace = {
-      x: englishOrder,
-	    y: textFreq, 
+      x: englishCharOrder,
+	    y: textByEnglishFreq, 
       mode: "lines",
       name: "Cipher Frequencies"};
 
@@ -193,11 +207,11 @@
 
     let order=document.getElementById("freq-order")
     let content = ""
-    for(val of englishOrder){
+    for(val of englishCharOrder){
       content += val + " "
     }
     content += "<br>"
-    for(val of textOrder){
+    for(val of textCharOrder){
       content += val + "  "
     }
     order.innerHTML = content
